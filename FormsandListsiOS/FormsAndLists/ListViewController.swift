@@ -59,11 +59,11 @@ class ListViewController: UIViewController {
         // Add empty state label
         view.addSubview(emptyStateLabel)
         
+        // Initial constraints (will be updated in setupBannerAd)
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
             emptyStateLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emptyStateLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
@@ -73,17 +73,19 @@ class ListViewController: UIViewController {
     private func setupBannerAd() {
         // Create and setup banner view
         bannerView = GADBannerView(adSize: GADAdSizeBanner)
+        bannerView.backgroundColor = .secondarySystemBackground // Add background color to make it visible
         bannerView.adUnitID = AdConfig.bannerID
         bannerView.rootViewController = self
         bannerView.delegate = self
         bannerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(bannerView)
         
-        // Update constraints
+        // Set banner constraints
         NSLayoutConstraint.activate([
             bannerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bannerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             bannerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            bannerView.heightAnchor.constraint(equalToConstant: 50), // Standard banner height
             
             // Update table view bottom constraint
             tableView.bottomAnchor.constraint(equalTo: bannerView.topAnchor)
