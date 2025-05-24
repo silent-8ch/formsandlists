@@ -1,6 +1,0 @@
-framework module Pods_FormsAndLists {
-  umbrella header "Pods-FormsAndLists-umbrella.h"
-
-  export *
-  module * { export * }
-}
