@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Forms And Lists</string>
+    <string name="username_hint">hint: username is username</string>
+    <string name="login_title">The password is password</string>
+    <string name="username_label">Username</string>
+    <string name="password_label">Password</string>
+    <string name="login_button">Login</string>
+    <string name="login_success">Login successful</string>
+    <string name="login_failed">Invalid credentials</string>
 </resources>

@@ -1,0 +1,27 @@
+{
+  "appName": "Forms and Lists",
+  "features": {
+    "loginPuzzle": {
+      "screen": "Login",
+      "title": "The password is password",
+      "fields": {
+        "username": {
+          "type": "text",
+          "hint": "hint: username is username",
+          "correctValue": "username"
+        },
+        "password": {
+          "type": "password",
+          "hint": "",
+          "correctValue": "password"
+        }
+      },
+      "validation": {
+        "success": {
+          "type": "toast",
+          "message": "Login successful"
+        }
+      }
+    }
+  }
+} 
