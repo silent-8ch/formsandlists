@@ -3,12 +3,15 @@ package com.p4u1.formsandlists.android
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
+import androidx.compose.animation.*
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -19,6 +22,7 @@ import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.p4u1.formsandlists.android.ui.theme.*
@@ -30,23 +34,128 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            var currentScreen by remember { mutableStateOf(Screen.Login) }
             var showSuccess by remember { mutableStateOf(false) }
             
-            AnimatedVisibility(
-                visible = !showSuccess,
-                enter = fadeIn(),
-                exit = fadeOut()
+            when (currentScreen) {
+                Screen.Login -> {
+                    LoginScreen(onLoginSuccess = { currentScreen = Screen.List })
+                }
+                Screen.List -> {
+                    ListScreen(showSuccess = showSuccess, onSuccess = { showSuccess = true })
+                }
+            }
+        }
+    }
+}
+
+enum class Screen {
+    Login, List
+}
+
+data class ListItem(
+    val id: Int,
+    val text: String = "List Item ${Random.nextInt(100, 999)}"
+)
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ListScreen(showSuccess: Boolean, onSuccess: () -> Unit) {
+    var items by remember { mutableStateOf(listOf<ListItem>()) }
+    val maxItems = 3
+    
+    LaunchedEffect(items.size) {
+        if (items.size == maxItems && !showSuccess) {
+            onSuccess()
+        }
+    }
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = if (showSuccess) "Good Job!" else "Add three items",
+                        style = MaterialTheme.typography.titleLarge
+                    )
+                }
+            )
+        },
+        floatingActionButton = {
+            if (items.size < maxItems) {
+                FloatingActionButton(
+                    onClick = {
+                        items = items + ListItem(items.size)
+                    }
+                ) {
+                    Icon(Icons.Default.Add, contentDescription = "Add item")
+                }
+            }
+        }
+    ) { padding ->
+        Box(modifier = Modifier.fillMaxSize()) {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding)
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                LoginScreen(onLoginSuccess = { showSuccess = true })
+                items(items) { item ->
+                    ListItemRow(
+                        item = item,
+                        isActive = showSuccess
+                    )
+                }
             }
             
-            AnimatedVisibility(
-                visible = showSuccess,
-                enter = fadeIn(),
-                exit = fadeOut()
-            ) {
-                SuccessScreen()
+            if (showSuccess) {
+                ConfettiAnimation()
             }
+            
+            if (items.isEmpty()) {
+                Text(
+                    text = "Tap + to add items",
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .padding(16.dp),
+                    style = MaterialTheme.typography.bodyLarge,
+                    textAlign = TextAlign.Center,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun ListItemRow(
+    item: ListItem,
+    isActive: Boolean
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(64.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = if (isActive) 
+                MaterialTheme.colorScheme.primaryContainer 
+            else MaterialTheme.colorScheme.surfaceVariant
+        )
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp),
+            contentAlignment = Alignment.CenterStart
+        ) {
+            Text(
+                text = item.text,
+                style = MaterialTheme.typography.bodyLarge,
+                color = if (isActive) 
+                    MaterialTheme.colorScheme.onPrimaryContainer 
+                else MaterialTheme.colorScheme.onSurfaceVariant
+            )
         }
     }
 }

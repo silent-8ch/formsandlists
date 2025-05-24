@@ -86,10 +86,10 @@ class ViewController: UIViewController {
         guard let password = passwordField.text else { return }
         
         if password == "password" {
-            let successVC = SuccessViewController()
-            successVC.modalPresentationStyle = .fullScreen
-            successVC.modalTransitionStyle = .crossDissolve
-            present(successVC, animated: true)
+            let listVC = ListViewController()
+            let navController = UINavigationController(rootViewController: listVC)
+            navController.modalPresentationStyle = .fullScreen
+            present(navController, animated: true)
         } else {
             // Show error alert
             let alert = UIAlertController(title: "Error", 
