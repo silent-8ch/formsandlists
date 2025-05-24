@@ -1,4 +1,5 @@
 import UIKit
+import GoogleMobileAds
 
 class ListItem {
     let id: Int
@@ -14,6 +15,7 @@ class ListViewController: UIViewController {
     private var items: [ListItem] = []
     private let maxItems = 3
     private var isSuccess = false
+    private var bannerView: GADBannerView!
     
     private let tableView: UITableView = {
         let table = UITableView()
@@ -35,6 +37,7 @@ class ListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupBannerAd()
     }
     
     private func setupUI() {
@@ -65,6 +68,29 @@ class ListViewController: UIViewController {
             emptyStateLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emptyStateLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+    }
+    
+    private func setupBannerAd() {
+        // Create and setup banner view
+        bannerView = GADBannerView(adSize: GADAdSizeBanner)
+        bannerView.adUnitID = AdConfig.bannerID
+        bannerView.rootViewController = self
+        bannerView.delegate = self
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bannerView)
+        
+        // Update constraints
+        NSLayoutConstraint.activate([
+            bannerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bannerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bannerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            // Update table view bottom constraint
+            tableView.bottomAnchor.constraint(equalTo: bannerView.topAnchor)
+        ])
+        
+        // Load banner ad
+        bannerView.load(GADRequest())
     }
     
     @objc private func addButtonTapped() {
@@ -130,5 +156,16 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 64 // Match Android's height
+    }
+}
+
+// MARK: - GADBannerViewDelegate
+extension ListViewController: GADBannerViewDelegate {
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        print("Banner ad loaded successfully")
+    }
+    
+    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+        print("Banner ad failed to load with error: \(error.localizedDescription)")
     }
 } 

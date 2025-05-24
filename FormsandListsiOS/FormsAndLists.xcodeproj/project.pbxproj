@@ -6,8 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		068FC443E5909C6E57A1AE83 /* Pods_FormsAndLists.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE490317DE0622A17CBCCA9F /* Pods_FormsAndLists.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		395A5125DA8CCAB190226111 /* Pods-FormsAndLists.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FormsAndLists.debug.xcconfig"; path = "Target Support Files/Pods-FormsAndLists/Pods-FormsAndLists.debug.xcconfig"; sourceTree = "<group>"; };
+		55C7E33A5298861C3D9F24F9 /* Pods-FormsAndLists.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FormsAndLists.release.xcconfig"; path = "Target Support Files/Pods-FormsAndLists/Pods-FormsAndLists.release.xcconfig"; sourceTree = "<group>"; };
 		7FE79CA42DE13963002AC243 /* FormsAndLists.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FormsAndLists.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE490317DE0622A17CBCCA9F /* Pods_FormsAndLists.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FormsAndLists.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -36,17 +43,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				068FC443E5909C6E57A1AE83 /* Pods_FormsAndLists.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D81E24B8C22BC411C942B46 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DE490317DE0622A17CBCCA9F /* Pods_FormsAndLists.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		55E238ABF6CF60488382C2F7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				395A5125DA8CCAB190226111 /* Pods-FormsAndLists.debug.xcconfig */,
+				55C7E33A5298861C3D9F24F9 /* Pods-FormsAndLists.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		7FE79C9B2DE13963002AC243 = {
 			isa = PBXGroup;
 			children = (
 				7FE79CA62DE13963002AC243 /* FormsAndLists */,
 				7FE79CA52DE13963002AC243 /* Products */,
+				55E238ABF6CF60488382C2F7 /* Pods */,
+				4D81E24B8C22BC411C942B46 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,9 +92,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7FE79CB72DE13965002AC243 /* Build configuration list for PBXNativeTarget "FormsAndLists" */;
 			buildPhases = (
+				89E1FFF3D07816E06DEB8727 /* [CP] Check Pods Manifest.lock */,
 				7FE79CA02DE13963002AC243 /* Sources */,
 				7FE79CA12DE13963002AC243 /* Frameworks */,
 				7FE79CA22DE13963002AC243 /* Resources */,
+				B070F3BE1731E0CA86D3CC92 /* [CP] Copy Pods Resources */,
+				995CBB6153D2A9BF8996DEC0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -77,8 +107,6 @@
 				7FE79CA62DE13963002AC243 /* FormsAndLists */,
 			);
 			name = FormsAndLists;
-			packageProductDependencies = (
-			);
 			productName = FormsAndLists;
 			productReference = 7FE79CA42DE13963002AC243 /* FormsAndLists.app */;
 			productType = "com.apple.product-type.application";
@@ -127,6 +155,65 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		89E1FFF3D07816E06DEB8727 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FormsAndLists-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		995CBB6153D2A9BF8996DEC0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FormsAndLists/Pods-FormsAndLists-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FormsAndLists/Pods-FormsAndLists-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FormsAndLists/Pods-FormsAndLists-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B070F3BE1731E0CA86D3CC92 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FormsAndLists/Pods-FormsAndLists-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FormsAndLists/Pods-FormsAndLists-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FormsAndLists/Pods-FormsAndLists-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7FE79CA02DE13963002AC243 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -140,6 +227,7 @@
 /* Begin XCBuildConfiguration section */
 		7FE79CB82DE13965002AC243 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 395A5125DA8CCAB190226111 /* Pods-FormsAndLists.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -153,6 +241,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -168,6 +257,7 @@
 		};
 		7FE79CB92DE13965002AC243 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 55C7E33A5298861C3D9F24F9 /* Pods-FormsAndLists.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -181,6 +271,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -198,7 +289,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -231,7 +321,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -246,7 +336,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
